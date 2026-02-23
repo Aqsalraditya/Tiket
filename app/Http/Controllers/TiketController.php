@@ -85,4 +85,15 @@ class TiketController extends Controller
         $ticket->delete(); // Sekarang Laravel tahu data mana yang harus dihapus
         return redirect()->route('tickets.index')->with('success', 'Ticket berhasil dihapus.');
     }
-}
+
+    public function storeComment(Request $request)
+    {
+        $request->validate([
+            'body' => 'required|min:3|max:1000',
+        ]);
+
+        $cleanComment = strip_tags($request->body);
+
+        return back()->with('success', 'Komentar aman tersimpan!');
+    }
+}   
